@@ -351,17 +351,17 @@ namespace TalleresGuate
         {
             try
             {
-                // 1. Recuperar los valores base de la pantalla de forma segura
+                // Recuperar los valores base de la pantalla de forma segura
                 decimal salarioBase = string.IsNullOrEmpty(txtSalarioBase.Text) ? 0 : Convert.ToDecimal(txtSalarioBase.Text);
                 int horasTrabajadas = Convert.ToInt32(nudHorasTrabajadas.Value);
 
-                // 2. Ejecutar tus métodos de cálculo en orden secuencial
+                // Ejecutar tus métodos de cálculo en orden secuencial
                 decimal pagoHorasExtra = MtdCalcularPagoHorasExtra(horasTrabajadas);
                 decimal igss = MtdCalcularIGSS(salarioBase, pagoHorasExtra);
                 decimal isr = MtdCalcularISR(salarioBase, pagoHorasExtra);
                 decimal totalPago = MtdCalcularTotalPago(salarioBase, pagoHorasExtra, igss, isr);
 
-                // 3. Imprimir los resultados en los TextBox formateados a 2 decimales
+                // Imprimir los resultados en los TextBox formateados a 2 decimales
                 txtPagoHorasExtra.Text = pagoHorasExtra.ToString("N2");
                 txtIGSS.Text = igss.ToString("N2");
                 txtISR.Text = isr.ToString("N2");
