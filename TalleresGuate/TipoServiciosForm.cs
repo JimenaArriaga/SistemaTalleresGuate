@@ -27,7 +27,8 @@ namespace TalleresGuate
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-
+            // Cierra el formulario actual
+            this.Close();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -55,6 +56,7 @@ namespace TalleresGuate
 
         }
 
+        // Evento Load del formulario para cargar datos al iniciar
         private void TipoServiciosForm_Load(object sender, EventArgs e)
         {
             MtdCrudConsultar();
@@ -68,7 +70,7 @@ namespace TalleresGuate
             dgvTipoServicios.ClearSelection();
 
             // Bloquear campos al iniciar la pantalla
-            txtCodigoTipoServicio.Enabled = false; // Es Identity (Autoincrementable)
+            txtCodigoTipoServicio.Enabled = false; // Es Autoincrementable
             cboxNombreServicio.Enabled = false;
             txtDescripcionServicio.Enabled = false;
             rdbActivo.Enabled = false;
@@ -82,7 +84,6 @@ namespace TalleresGuate
             btnEliminar.Enabled = false;
             btnImprimir.Enabled = false;
 
-            
         }
 
         // CRUD Consultar
@@ -127,16 +128,9 @@ namespace TalleresGuate
 
         }
 
-        // --- CRUD AGREGAR ---
+        // CRUD AGREGAR
         public void MtdCrudAgregar()
         {
-            // Validación básica de campos vacíos
-            if (string.IsNullOrEmpty(cboxNombreServicio.Text) || string.IsNullOrEmpty(txtCostoBase.Text) || string.IsNullOrEmpty(txtRecargoServicio.Text))
-            {
-                MessageBox.Show("Por favor, llene todos los campos requeridos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             SqlConnection conn = connDatos.MtdConexionBaseDatos();
 
             try
@@ -162,7 +156,6 @@ namespace TalleresGuate
                 cmd.Parameters.AddWithValue("@RecargoServicio", recargo);
                 cmd.Parameters.AddWithValue("@TotalServicio", total);
 
-                // Mapeo opcional por si agregas la descripción a la UI
                 cmd.Parameters.AddWithValue("@DescripcionServicio", txtDescripcionServicio.Text);
 
                 if (rdbActivo.Checked == true)
@@ -202,11 +195,12 @@ namespace TalleresGuate
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar el servicio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al agregar el tipo de servicio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 conn.Close();
             }
         }
 
+        // Botón Nuevo 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             // Habilitar campos para la edición
@@ -216,9 +210,6 @@ namespace TalleresGuate
             rdbActivo.Enabled = true;
             rdbInactivo.Enabled = true;
 
-            // Por defecto seleccionar Activo al ser un registro nuevo
-            rdbActivo.Checked = true;
-
             // Control de botones
             btnNuevo.Enabled = false;
             btnCancelar.Enabled = true;
@@ -227,6 +218,7 @@ namespace TalleresGuate
             btnEliminar.Enabled = false;
         }
 
+        // Botón Cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             txtCodigoTipoServicio.Enabled = false;
@@ -244,6 +236,7 @@ namespace TalleresGuate
             MtdLimpiaCampos();
         }
 
+        // Método para limpiar los campos del formulario
         private void MtdLimpiaCampos()
         {
             txtCodigoTipoServicio.Clear();
@@ -257,6 +250,7 @@ namespace TalleresGuate
             rdbInactivo.Checked = false;
         }
 
+        // Botón Guardar
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             MtdCrudAgregar();
@@ -294,6 +288,7 @@ namespace TalleresGuate
             return costoBase + recargo;
         }
 
+        // Evento para actualizar los montos al seleccionar un servicio
         private void cboxNombreServicio_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Verificar que haya una opción seleccionada
@@ -301,15 +296,15 @@ namespace TalleresGuate
             {
                 string servicioSeleccionado = cboxNombreServicio.SelectedItem.ToString().Trim();
 
-                // 1. Calcular y mostrar Costo Base
+                // Calcular y mostrar Costo Base
                 decimal costoBase = MtdCalcularCostoBase(servicioSeleccionado);
                 txtCostoBase.Text = costoBase.ToString("F2");
 
-                // 2. Calcular y mostrar Recargo
+                // Calcular y mostrar Recargo
                 decimal recargo = MtdCalcularRecargoServicio(servicioSeleccionado, costoBase);
                 txtRecargoServicio.Text = recargo.ToString("F2");
 
-                // 3. Calcular y mostrar el Total de forma directa
+                // Calcular y mostrar el Total de forma directa
                 decimal total = MtdCalcularTotal(costoBase, recargo);
                 txtTotalServicio.Text = total.ToString("F2");
             }
@@ -322,6 +317,7 @@ namespace TalleresGuate
             }
         }
 
+        // Evento para habilitar o deshabilitar el DataGridView según el estado del checkbox
         private void chkSeleccionar_CheckedChanged(object sender, EventArgs e)
         {
             if (chkSeleccionar.Checked == true)
@@ -356,6 +352,7 @@ namespace TalleresGuate
             }
         }
 
+        // Evento para cargar los datos del registro seleccionado en el DataGridView a los controles de edición
         private void dgvTipoServicios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Enviar los valore de la fila a los controles de Gestion
@@ -452,6 +449,7 @@ namespace TalleresGuate
             }
         }
 
+        // Botón Editar
         private void btnEditar_Click(object sender, EventArgs e)
         {
             MtdCrudEditar();
@@ -511,6 +509,7 @@ namespace TalleresGuate
             }
         }
 
+        // Botón Eliminar
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             MtdCrudEliminar();

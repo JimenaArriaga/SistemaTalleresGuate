@@ -25,9 +25,11 @@ namespace TalleresGuate
 
         }
 
+        // Botón para cerrar el formulario
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-
+            // Cierra el formulario actual
+            this.Close();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -45,6 +47,7 @@ namespace TalleresGuate
 
         }
 
+        // Metodo de carga inicial del formulario
         private void PlanillasForm_Load(object sender, EventArgs e)
         {
             MtdCrudConsultar();
@@ -112,6 +115,7 @@ namespace TalleresGuate
 
         }
 
+        // CRUD Agregar
         public void MtdCrudAgregar()
         {
             SqlConnection conn = connDatos.MtdConexionBaseDatos();
@@ -129,7 +133,7 @@ namespace TalleresGuate
 
                 SqlCommand cmd = new SqlCommand(QueryAgregar, conn);
 
-                // Mapeo de parámetros con conversión de tipos según tu BD
+                // Mapeo de parámetros con conversión de tipos según la BD
                 if (cboxCodigoEmpleado.SelectedValue != null && int.TryParse(cboxCodigoEmpleado.SelectedValue.ToString(), out int idEmp))
                 {
                     cmd.Parameters.AddWithValue("@CodigoEmpleado", idEmp);
@@ -190,6 +194,7 @@ namespace TalleresGuate
             }
         }
 
+        // Botón Nuevo para activar campos de entrada
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             // Activar únicamente los campos requeridos para la entrada de datos
@@ -207,6 +212,7 @@ namespace TalleresGuate
             btnEliminar.Enabled = true;
         }
 
+        // Método para cargar empleados activos en el ComboBox
         public void MtdCargarEmpleados()
         {
             SqlConnection conn = connDatos.MtdConexionBaseDatos();
@@ -228,6 +234,7 @@ namespace TalleresGuate
             }
         }
 
+        // Método para obtener el salario base del empleado seleccionado
         public decimal MtdObtenerSalarioBase(int codigoEmpleado)
         {
             decimal salarioBase = 0;
@@ -253,6 +260,7 @@ namespace TalleresGuate
             return salarioBase;
         }
 
+        // Botón Cancelar para limpiar campos y bloquear entradas
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             // Bloquear los campos correspondientes
@@ -278,7 +286,8 @@ namespace TalleresGuate
         {
             // Limpieza completa de los controles 
             txtCodigoPlanilla.Clear();
-            cboxCodigoEmpleado.Text = "";
+            //cboxCodigoEmpleado.Text = "";
+            cboxCodigoEmpleado.SelectedIndex = -1;
             txtSalarioBase.Clear();
             nudHorasTrabajadas.Value = 0;
             txtPagoHorasExtra.Clear();
@@ -290,8 +299,10 @@ namespace TalleresGuate
             rdbInactivo.Checked = false;
         }
 
+        // Botón Guardar 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            // Llamar al metodo
             MtdCrudAgregar();
         }
 
@@ -313,19 +324,22 @@ namespace TalleresGuate
                 return 0;
             }
         }
-        // Igss = (Método)(SalarioBase + PagoHorasExtras) * 0.0483
+
+        // Metodo para calcular IGSS
         public decimal MtdCalcularIGSS(decimal salarioBase, decimal pagoHorasExtra)
         {
             decimal igss = (salarioBase + pagoHorasExtra) * 0.0483m;
             return igss;
         }
-        // Isr = (Método)(SalarioBase + PagoHorasExtras) * 0.05
+
+        // Metodo para calcular ISR
         public decimal MtdCalcularISR(decimal salarioBase, decimal pagoHorasExtra)
         {
             decimal isr = (salarioBase + pagoHorasExtra) * 0.05m;
             return isr;
         }
-        // TotalPago = (Método)(SalarioBase + PagoHorasExtras) - Igss - Isr
+
+        // metodo para calcular el total a pagar al empleado
         public decimal MtdCalcularTotalPago(decimal salarioBase, decimal pagoHorasExtra, decimal igss, decimal isr)
         {
             decimal totalPago = (salarioBase + pagoHorasExtra) - igss - isr;
@@ -359,25 +373,28 @@ namespace TalleresGuate
             }
         }
 
+        // Evento para actualizar el salario base al seleccionar un empleado y recalcular la planilla
         private void cboxCodigoEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Validar estrictamente que el valor seleccionado sea un número entero válido
+            // Validar  que el valor seleccionado sea un número entero válido
             if (cboxCodigoEmpleado.SelectedValue != null && int.TryParse(cboxCodigoEmpleado.SelectedValue.ToString(), out int idEmpleado))
             {
-                // Obtener el salario base usando tu método
+                // Obtener el salario base usando el método
                 decimal salario = MtdObtenerSalarioBase(idEmpleado);
                 txtSalarioBase.Text = salario.ToString("F2"); // "F2" evita conflictos de caracteres de moneda al reconvertir
 
-                // Mandar a llamar al unificador para que actualice la pantalla
+                // Mandar a llamar al metodo para que actualice la pantalla
                 MtdProcesarCalculosPlanilla();
             }
         }
 
+        // Evento para recalcular la planilla cada vez que se modifiquen las horas trabajadas
         private void nudHorasTrabajadas_ValueChanged(object sender, EventArgs e)
         {
             MtdProcesarCalculosPlanilla();
         }
 
+        // Evento para habilitar o deshabilitar el DataGridView según el estado del CheckBox
         private void chkSeleccionar_CheckedChanged(object sender, EventArgs e)
         {
             if (chkSeleccionar.Checked == true)
@@ -412,11 +429,19 @@ namespace TalleresGuate
             }
         }
 
+        // Evento para cargar los datos de la fila seleccionada en el DataGridView a los controles de entrada
         private void dgvPlanillas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Enviar los valores de la fila a los controles de Gestión de Planillas
             txtCodigoPlanilla.Text = dgvPlanillas.CurrentRow.Cells["CodigoPlanilla"].Value.ToString();
-            cboxCodigoEmpleado.SelectedValue = dgvPlanillas.CurrentRow.Cells["CodigoEmpleado"].Value;
+            if (dgvPlanillas.CurrentRow.Cells["CodigoEmpleado"].Value != DBNull.Value && dgvPlanillas.CurrentRow.Cells["CodigoEmpleado"].Value != null)
+            {
+                cboxCodigoEmpleado.SelectedValue = Convert.ToInt32(dgvPlanillas.CurrentRow.Cells["CodigoEmpleado"].Value);
+            }
+            else
+            {
+                cboxCodigoEmpleado.SelectedIndex = -1;
+            }
             txtSalarioBase.Text = Convert.ToDecimal(dgvPlanillas.CurrentRow.Cells["SalarioBase"].Value).ToString("N2");
             nudHorasTrabajadas.Value = Convert.ToInt32(dgvPlanillas.CurrentRow.Cells["HorasTrabajadas"].Value);
             txtPagoHorasExtra.Text = Convert.ToDecimal(dgvPlanillas.CurrentRow.Cells["PagoHorasExtra"].Value).ToString("N2");
@@ -476,15 +501,7 @@ namespace TalleresGuate
 										  ";
                 SqlCommand cmd = new SqlCommand(QueryAgregar, conn);
                 cmd.Parameters.AddWithValue("@CodigoPlanilla", txtCodigoPlanilla.Text);
-                if (cboxCodigoEmpleado.SelectedValue != null && int.TryParse(cboxCodigoEmpleado.SelectedValue.ToString(), out int idEmp))
-                {
-                    cmd.Parameters.AddWithValue("@CodigoEmpleado", idEmp);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@CodigoEmpleado", DBNull.Value);
-                }
-
+                cmd.Parameters.AddWithValue("@CodigoEmpleado", cboxCodigoEmpleado.SelectedValue ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@SalarioBase", Convert.ToDecimal(txtSalarioBase.Text));
                 cmd.Parameters.AddWithValue("@HorasTrabajadas", Convert.ToInt32(nudHorasTrabajadas.Value));
                 cmd.Parameters.AddWithValue("@PagoHorasExtra", Convert.ToDecimal(txtPagoHorasExtra.Text));
@@ -522,6 +539,7 @@ namespace TalleresGuate
             }
         }
 
+        // Botón Editar 
         private void btnEditar_Click(object sender, EventArgs e)
         {
             MtdCrudEditar();
@@ -581,8 +599,10 @@ namespace TalleresGuate
             }
         }
 
+        // Botón Eliminar
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            // Llamar al método
             MtdCrudEliminar();
         }
     }

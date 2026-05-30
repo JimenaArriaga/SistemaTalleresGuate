@@ -61,7 +61,7 @@ namespace TalleresGuate
             dgvDetalleFacturas.AllowUserToAddRows = false;
             dgvDetalleFacturas.ClearSelection();
 
-            // Bloquear campos al iniciar la pantalla (El campo CodigoDetalle no se activa por ser IDENTITY)
+            // Bloquear campos al iniciar la pantalla 
             cboxCodigoFactura.Enabled = false;
             cboxCodigoInventario.Enabled = false;
             cboxCodigoTipoServicio.Enabled = false;
@@ -75,6 +75,7 @@ namespace TalleresGuate
             btnGuardar.Enabled = false;
             btnEditar.Enabled = false;
             btnEliminar.Enabled = false;
+            btnImprimir.Enabled = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -142,7 +143,7 @@ namespace TalleresGuate
 
                 SqlCommand cmd = new SqlCommand(QueryAgregar, conn);
 
-                // Mapeo de parámetros según tu base de datos y diseño
+                // Mapeo de parámetros según base de datos y diseño
                 cmd.Parameters.AddWithValue("@CodigoFactura", cboxCodigoFactura.SelectedValue ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@CodigoInventario", cboxCodigoInventario.SelectedValue ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@CodigoTipoServicio", cboxCodigoTipoServicio.SelectedValue ?? DBNull.Value);
@@ -195,6 +196,8 @@ namespace TalleresGuate
                 conn.Close();
             }
         }
+
+        // Botón Nuevo
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             // Habilitar campos para el ingreso 
@@ -211,9 +214,9 @@ namespace TalleresGuate
             btnGuardar.Enabled = true;
             btnEditar.Enabled = true;
             btnEliminar.Enabled = true;
-
         }
 
+        // Botón Cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             // Bloquear campos
@@ -235,13 +238,13 @@ namespace TalleresGuate
             MtdLimpiaCampos();
         }
 
-        // Método para cargar las Facturaciones 
+        // Método para cargar las Facturaciones en el comboBox
         public void MtdCargarFacturas()
         {
             SqlConnection conn = connDatos.MtdConexionBaseDatos();
             try
             {
-                // Traemos el ID y una descripción (Fecha) para que el usuario se guíe
+                // Consulta la base de datos, trae el ID de la tabla factura
                 string query = "SELECT CodigoFactura, CONCAT('Factura #', CodigoFactura, ' - ', FechaFactura) AS InfoFactura FROM TBL_Facturaciones WHERE Estado = 1";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
@@ -249,7 +252,7 @@ namespace TalleresGuate
 
                 cboxCodigoFactura.DataSource = dt;
                 cboxCodigoFactura.DisplayMember = "InfoFactura"; // Lo que ve el usuario
-                cboxCodigoFactura.ValueMember = "CodigoFactura";   // El valor real (ID)
+                cboxCodigoFactura.ValueMember = "CodigoFactura";   // El valor real o ID
                 cboxCodigoFactura.SelectedIndex = -1;             // Iniciar vacío
             }
             catch (Exception ex)
@@ -302,7 +305,7 @@ namespace TalleresGuate
             }
         }
 
-        // 1. Método para obtener el PrecioVenta desde TBL_Inventarios
+        // Método para obtener el PrecioVenta desde TBL_Inventarios
         public decimal MtdObtenerPrecioUnitario(int codigoInventario)
         {
             decimal precioVenta = 0;
@@ -329,7 +332,7 @@ namespace TalleresGuate
             return precioVenta;
         }
 
-        // 2. Método para obtener TotalServicio desde TBL_TipoServicios
+        // Método para obtener TotalServicio desde TBL_TipoServicios
         public decimal MtdObtenerTotalServicio(int codigoTipoServicio)
         {
             decimal totalServicio = 0;
@@ -356,7 +359,7 @@ namespace TalleresGuate
             return totalServicio;
         }
 
-        // 3. Método maestro que procesa el SubTotal, Impuesto y TotalDetalle
+        // Método que procesa el SubTotal, Impuesto y TotalDetalle
         public void MtdCalcularTotales()
         {
             try
@@ -372,13 +375,13 @@ namespace TalleresGuate
                     totalServicio = MtdObtenerTotalServicio(idServicio);
                 }
 
-                // Lógica: SubTotal = (Cantidad * PrecioUnitario) + TotalServicio
+                // obtener el subtotal
                 decimal subTotal = (cantidad * precioUnitario) + totalServicio;
 
-                // Lógica: Impuesto = SubTotal * 0.12
+                // obtener el impuesto 
                 decimal impuesto = subTotal * 0.12m;
 
-                // Lógica: TotalDetalle = SubTotal + Impuesto
+                // obtener el total del detalle
                 decimal totalDetalle = subTotal + impuesto;
 
                 // Mostrar los resultados formateados con 2 decimales en los TextBox
@@ -392,17 +395,20 @@ namespace TalleresGuate
             }
         }
 
+        // Botón Guardar
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            // Llamar al método CRUD Agregar
             MtdCrudAgregar();
         }
 
+        // Método para limpiar los campos del formulario
         private void MtdLimpiaCampos()
         {
             txtCodigoDetalleFactura.Text = "";
-            cboxCodigoFactura.Text = "";
-            cboxCodigoInventario.Text = "";
-            cboxCodigoTipoServicio.Text = "";
+            cboxCodigoFactura.SelectedIndex = -1;
+            cboxCodigoInventario.SelectedIndex = -1;
+            cboxCodigoTipoServicio.SelectedIndex = -1;
             nudCantidad.Value = 0;
             txtPrecioUnitario.Clear();
             txtSubtotal.Clear();
@@ -412,6 +418,7 @@ namespace TalleresGuate
             rdbInactivo.Checked = false;
         }
 
+        // Checkbox para habilitar o bloquear el DataGridView
         private void chkSeleccionar_CheckedChanged(object sender, EventArgs e)
         {
             if (chkSeleccionar.Checked == true)
@@ -445,6 +452,7 @@ namespace TalleresGuate
             }
         }
 
+        // Cambia cada vez que selecciona un registro 
         private void cboxCodigoInventario_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Verificamos que sea una selección válida y contenga el ID numérico
@@ -458,12 +466,14 @@ namespace TalleresGuate
             }
         }
 
+        // Cada vez que cambie el servicio, se vuelven a procesar los totales
         private void cboxCodigoTipoServicio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Cada vez que cambie el servicio, se vuelven a procesar los totales
+            // llamar al método que calcula los totales
             MtdCalcularTotales();
         }
 
+        // Carga la informacion al seleccionar 
         private void dgvDetalleFacturas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Enviar los valore de la fila a los controles de Gestion
@@ -547,7 +557,7 @@ namespace TalleresGuate
                     cmd.Parameters.AddWithValue("@Estado", false);
                 }
 
-                cmd.Parameters.AddWithValue("@UsuarioSistema", "Emorales");
+                cmd.Parameters.AddWithValue("@UsuarioSistema", "Milagros Arriaga");
                 cmd.Parameters.AddWithValue("@FechaSistema", DateTime.Now.Date);
                 cmd.Parameters.AddWithValue("@HoraSistema", DateTime.Now.TimeOfDay);
 
@@ -567,6 +577,7 @@ namespace TalleresGuate
             }
         }
 
+        // Botón editar
         private void btnEditar_Click(object sender, EventArgs e)
         {
             MtdCrudEditar();
@@ -630,6 +641,13 @@ namespace TalleresGuate
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             MtdCrudEliminar();
+        }
+
+        // Botón para cerrar el formulario
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            // Cierra el formulario actual
+            this.Close();
         }
     }
 }

@@ -31,6 +31,7 @@ namespace TalleresGuate
 
         }
 
+        // Metodo de carga inicial
         private void FacturacionesForm_Load(object sender, EventArgs e)
         {
             MtdCrudConsultar();
@@ -198,8 +199,7 @@ namespace TalleresGuate
             SqlConnection conn = connDatos.MtdConexionBaseDatos();
             try
             {
-                // Traemos el ID y una columna descriptiva (por ejemplo, el Nombre Completo)
-                // Ojo: Asegúrate de que el nombre de la columna coincida con tu TBL_Clientes (ej. NombreCliente)
+                // Traemos el ID y una columna descriptiva 
                 string Query = "SELECT CodigoCliente, NombreCliente FROM TBL_Clientes WHERE Estado = 1 ORDER BY NombreCliente ASC;";
 
                 SqlDataAdapter da = new SqlDataAdapter(Query, conn);
@@ -207,8 +207,8 @@ namespace TalleresGuate
                 da.Fill(dt);
 
                 cboxCodigoCliente.DataSource = dt;
-                cboxCodigoCliente.DisplayMember = "NombreCliente";  // Lo que el usuario va a VER en la lista
-                cboxCodigoCliente.ValueMember = "CodigoCliente";    // El ID real (el INT) que se guardará
+                cboxCodigoCliente.DisplayMember = "NombreCliente";  // Lo que el usuario ve
+                cboxCodigoCliente.ValueMember = "CodigoCliente";    // El ID 
 
                 // Dejarlo inicialmente vacío para que no autoseleccione el primero
                 cboxCodigoCliente.SelectedIndex = -1;
@@ -233,8 +233,8 @@ namespace TalleresGuate
                 da.Fill(dt);
 
                 cboxCodigoVehículo.DataSource = dt;
-                cboxCodigoVehículo.DisplayMember = "Placa";          // Lo que el usuario va a VER
-                cboxCodigoVehículo.ValueMember = "CodigoVehiculo";    // El ID real (el INT) que se guardará
+                cboxCodigoVehículo.DisplayMember = "Placa";          // Lo que el usuario ve
+                cboxCodigoVehículo.ValueMember = "CodigoVehiculo";    // El ID real 
 
                 cboxCodigoVehículo.SelectedIndex = -1;
             }
@@ -277,6 +277,7 @@ namespace TalleresGuate
             return subtotal - descuento + impuesto;
         }
 
+        // Botón Nuevo
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             // Bloquear campos al iniciar la pantalla
@@ -296,6 +297,7 @@ namespace TalleresGuate
             btnEliminar.Enabled = true;
         }
 
+        // Botón Cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             // Bloquear campos al iniciar la pantalla
@@ -317,13 +319,14 @@ namespace TalleresGuate
             MtdLimpiaCampos();
         }
 
+        // Método para limpiar campos
         private void MtdLimpiaCampos()
         {
             // Limpia valores en controles
             txtCodigoFactura.Text = "";
             txtNombreFactura.Clear();
-            cboxCodigoCliente.Text = "";
-            cboxCodigoVehículo.Text = "";
+            cboxCodigoCliente.SelectedIndex = -1;
+            cboxCodigoVehículo.SelectedIndex = -1;
             rdbActivo.Checked = false;
             rdbInactivo.Checked = false;
 
@@ -340,8 +343,10 @@ namespace TalleresGuate
 
         }
 
+        // Botón Guardar
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            // llamar al método de agregar
             MtdCrudAgregar();
         }
 
@@ -380,9 +385,10 @@ namespace TalleresGuate
             }
         }
 
+        // Cuando el subtotal cambie actualizar campos de descuento, impuesto y total a pagar
         private void txtSubtotal_TextChanged(object sender, EventArgs e)
         {
-            // 1. Si borras el texto y queda vacío, limpiamos los demás campos a 0
+            // Si borras el texto y queda vacío, limpiamos los demás campos a 0
             if (string.IsNullOrEmpty(txtSubtotal.Text.Trim()))
             {
                 txtDescuento.Text = "0.00";
@@ -393,31 +399,32 @@ namespace TalleresGuate
 
             try
             {
-                // 2. Convertimos el texto ingresado a decimal
+                // Convertir el texto ingresado a decimal
                 decimal subtotal = Convert.ToDecimal(txtSubtotal.Text);
 
-                // 3. Mandamos a llamar a tus 3 métodos matemáticos
+                // llamar a tus 3 métodos matemáticos
                 decimal descuento = MtdCalcularDescuento(subtotal);
                 decimal impuesto = MtdCalcularImpuesto(subtotal, descuento);
                 decimal totalPagar = MtdCalcularTotalPagar(subtotal, descuento, impuesto);
 
-                // 4. Mostramos los resultados en la pantalla con dos decimales
+                // Mostrar los resultados en la pantalla con dos decimales
                 txtDescuento.Text = descuento.ToString("F2");
                 txtImpuesto.Text = impuesto.ToString("F2");
                 txtTotalAPagar.Text = totalPagar.ToString("F2");
             }
             catch
             {
-                // Por si escribes una letra por error, para que no se congele el programa
+                // Por si se escribe una letra por error, para que no se congele el programa
                 txtDescuento.Text = "0.00";
                 txtImpuesto.Text = "0.00";
                 txtTotalAPagar.Text = "0.00";
             }
         }
 
+        // Al hacer click en una fila del DataGridView, enviar los valores a los controles de gestión para poder editarlos o eliminarlos
         private void dgvFacturaciones_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Enviar los valore de la fila a los controles de Gestion
+            // Envia los valore de la fila a los controles de Gestion
             txtCodigoFactura.Text = dgvFacturaciones.CurrentRow.Cells["CodigoFactura"].Value.ToString();
             // Forzar la conversión 
             if (dgvFacturaciones.CurrentRow.Cells["CodigoCliente"].Value != DBNull.Value)
@@ -523,7 +530,7 @@ namespace TalleresGuate
 
                 cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Facturación editada correctamente", "Confirmacíón", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Factura editada correctamente", "Confirmacíón", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 MtdCrudConsultar();
                 MtdLimpiaCampos();
@@ -537,6 +544,7 @@ namespace TalleresGuate
             }
         }
 
+        // Botón Editar
         private void btnEditar_Click(object sender, EventArgs e)
         {
             MtdCrudEditar();
@@ -547,7 +555,7 @@ namespace TalleresGuate
         {
             if (txtCodigoFactura.Text == "")
             {
-                MessageBox.Show("Debe seleccionar una planilla");
+                MessageBox.Show("Debe seleccionar una factura");
 
                 return;
             }
@@ -596,9 +604,17 @@ namespace TalleresGuate
             }
         }
 
+        // Botón Eliminar
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             MtdCrudEliminar();
+        }
+
+        // Botón Cerrar
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            // Cierra el formulario actual
+            this.Close();
         }
     }
 }

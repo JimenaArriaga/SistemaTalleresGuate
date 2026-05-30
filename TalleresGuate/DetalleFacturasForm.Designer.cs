@@ -79,26 +79,28 @@
             // 
             // btnCerrar
             // 
+            this.btnCerrar.Font = new System.Drawing.Font("Arial", 10F);
             this.btnCerrar.IconChar = FontAwesome.Sharp.IconChar.X;
             this.btnCerrar.IconColor = System.Drawing.Color.Black;
             this.btnCerrar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnCerrar.IconSize = 20;
-            this.btnCerrar.Location = new System.Drawing.Point(864, 479);
+            this.btnCerrar.Location = new System.Drawing.Point(896, 479);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(74, 29);
+            this.btnCerrar.Size = new System.Drawing.Size(87, 29);
             this.btnCerrar.TabIndex = 11;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // lblDetallesDeFactura
             // 
             this.lblDetallesDeFactura.AutoSize = true;
-            this.lblDetallesDeFactura.Font = new System.Drawing.Font("Georgia", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetallesDeFactura.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
             this.lblDetallesDeFactura.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblDetallesDeFactura.Location = new System.Drawing.Point(69, 30);
+            this.lblDetallesDeFactura.Location = new System.Drawing.Point(68, 12);
             this.lblDetallesDeFactura.Name = "lblDetallesDeFactura";
-            this.lblDetallesDeFactura.Size = new System.Drawing.Size(267, 29);
+            this.lblDetallesDeFactura.Size = new System.Drawing.Size(284, 32);
             this.lblDetallesDeFactura.TabIndex = 10;
             this.lblDetallesDeFactura.Text = "Detalles De Facturas";
             this.lblDetallesDeFactura.Click += new System.EventHandler(this.label1_Click);
@@ -106,7 +108,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(877, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(915, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(61, 69);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -119,9 +121,9 @@
             this.btnEliminar.IconColor = System.Drawing.Color.Black;
             this.btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnEliminar.IconSize = 20;
-            this.btnEliminar.Location = new System.Drawing.Point(790, 300);
+            this.btnEliminar.Location = new System.Drawing.Point(790, 295);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(85, 29);
+            this.btnEliminar.Size = new System.Drawing.Size(95, 29);
             this.btnEliminar.TabIndex = 18;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -136,7 +138,7 @@
             this.btnEditar.IconSize = 20;
             this.btnEditar.Location = new System.Drawing.Point(790, 224);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(85, 29);
+            this.btnEditar.Size = new System.Drawing.Size(95, 29);
             this.btnEditar.TabIndex = 8;
             this.btnEditar.Text = "Editar";
             this.btnEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -151,7 +153,7 @@
             this.btnGuardar.IconSize = 20;
             this.btnGuardar.Location = new System.Drawing.Point(790, 155);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(85, 29);
+            this.btnGuardar.Size = new System.Drawing.Size(95, 29);
             this.btnGuardar.TabIndex = 9;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -166,7 +168,7 @@
             this.btnCancelar.IconSize = 20;
             this.btnCancelar.Location = new System.Drawing.Point(790, 87);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(85, 29);
+            this.btnCancelar.Size = new System.Drawing.Size(95, 29);
             this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -181,7 +183,7 @@
             this.btnNuevo.IconSize = 20;
             this.btnNuevo.Location = new System.Drawing.Point(790, 26);
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(85, 29);
+            this.btnNuevo.Size = new System.Drawing.Size(95, 29);
             this.btnNuevo.TabIndex = 11;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -193,7 +195,7 @@
             this.lblEstado.AutoSize = true;
             this.lblEstado.Location = new System.Drawing.Point(426, 293);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(43, 13);
+            this.lblEstado.Size = new System.Drawing.Size(55, 16);
             this.lblEstado.TabIndex = 17;
             this.lblEstado.Text = "Estado:";
             // 
@@ -226,24 +228,24 @@
             this.tabPage2.Controls.Add(this.lblCodigoFactura);
             this.tabPage2.Controls.Add(this.txtCodigoDetalleFactura);
             this.tabPage2.Controls.Add(this.lblCodigoDetalleFactura);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(905, 382);
+            this.tabPage2.Size = new System.Drawing.Size(905, 379);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Gestiona";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // nudCantidad
             // 
-            this.nudCantidad.Location = new System.Drawing.Point(197, 293);
+            this.nudCantidad.Location = new System.Drawing.Point(226, 291);
             this.nudCantidad.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
             this.nudCantidad.Name = "nudCantidad";
-            this.nudCantidad.Size = new System.Drawing.Size(167, 20);
+            this.nudCantidad.Size = new System.Drawing.Size(167, 23);
             this.nudCantidad.TabIndex = 12;
             this.nudCantidad.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
@@ -253,7 +255,7 @@
             this.txtPrecioUnitario.Location = new System.Drawing.Point(527, 39);
             this.txtPrecioUnitario.Name = "txtPrecioUnitario";
             this.txtPrecioUnitario.ReadOnly = true;
-            this.txtPrecioUnitario.Size = new System.Drawing.Size(187, 20);
+            this.txtPrecioUnitario.Size = new System.Drawing.Size(187, 23);
             this.txtPrecioUnitario.TabIndex = 29;
             // 
             // txtSubtotal
@@ -262,7 +264,7 @@
             this.txtSubtotal.Location = new System.Drawing.Point(527, 103);
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.ReadOnly = true;
-            this.txtSubtotal.Size = new System.Drawing.Size(187, 20);
+            this.txtSubtotal.Size = new System.Drawing.Size(187, 23);
             this.txtSubtotal.TabIndex = 28;
             // 
             // txtImpuesto
@@ -271,7 +273,7 @@
             this.txtImpuesto.Location = new System.Drawing.Point(527, 164);
             this.txtImpuesto.Name = "txtImpuesto";
             this.txtImpuesto.ReadOnly = true;
-            this.txtImpuesto.Size = new System.Drawing.Size(187, 20);
+            this.txtImpuesto.Size = new System.Drawing.Size(187, 23);
             this.txtImpuesto.TabIndex = 27;
             this.txtImpuesto.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
@@ -281,33 +283,33 @@
             this.txtTotalDetalle.Location = new System.Drawing.Point(527, 227);
             this.txtTotalDetalle.Name = "txtTotalDetalle";
             this.txtTotalDetalle.ReadOnly = true;
-            this.txtTotalDetalle.Size = new System.Drawing.Size(187, 20);
+            this.txtTotalDetalle.Size = new System.Drawing.Size(187, 23);
             this.txtTotalDetalle.TabIndex = 26;
             // 
             // cboxCodigoTipoServicio
             // 
             this.cboxCodigoTipoServicio.FormattingEnabled = true;
-            this.cboxCodigoTipoServicio.Location = new System.Drawing.Point(197, 224);
+            this.cboxCodigoTipoServicio.Location = new System.Drawing.Point(226, 224);
             this.cboxCodigoTipoServicio.Name = "cboxCodigoTipoServicio";
-            this.cboxCodigoTipoServicio.Size = new System.Drawing.Size(167, 21);
+            this.cboxCodigoTipoServicio.Size = new System.Drawing.Size(167, 24);
             this.cboxCodigoTipoServicio.TabIndex = 25;
             this.cboxCodigoTipoServicio.SelectedIndexChanged += new System.EventHandler(this.cboxCodigoTipoServicio_SelectedIndexChanged);
             // 
             // cboxCodigoFactura
             // 
             this.cboxCodigoFactura.FormattingEnabled = true;
-            this.cboxCodigoFactura.Location = new System.Drawing.Point(197, 103);
+            this.cboxCodigoFactura.Location = new System.Drawing.Point(226, 103);
             this.cboxCodigoFactura.Name = "cboxCodigoFactura";
-            this.cboxCodigoFactura.Size = new System.Drawing.Size(167, 21);
+            this.cboxCodigoFactura.Size = new System.Drawing.Size(167, 24);
             this.cboxCodigoFactura.TabIndex = 24;
             this.cboxCodigoFactura.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
             // cboxCodigoInventario
             // 
             this.cboxCodigoInventario.FormattingEnabled = true;
-            this.cboxCodigoInventario.Location = new System.Drawing.Point(197, 163);
+            this.cboxCodigoInventario.Location = new System.Drawing.Point(226, 163);
             this.cboxCodigoInventario.Name = "cboxCodigoInventario";
-            this.cboxCodigoInventario.Size = new System.Drawing.Size(167, 21);
+            this.cboxCodigoInventario.Size = new System.Drawing.Size(167, 24);
             this.cboxCodigoInventario.TabIndex = 23;
             this.cboxCodigoInventario.SelectedIndexChanged += new System.EventHandler(this.cboxCodigoInventario_SelectedIndexChanged);
             // 
@@ -316,7 +318,7 @@
             this.lblImpuesto.AutoSize = true;
             this.lblImpuesto.Location = new System.Drawing.Point(426, 171);
             this.lblImpuesto.Name = "lblImpuesto";
-            this.lblImpuesto.Size = new System.Drawing.Size(53, 13);
+            this.lblImpuesto.Size = new System.Drawing.Size(68, 16);
             this.lblImpuesto.TabIndex = 21;
             this.lblImpuesto.Text = "Impuesto:";
             this.lblImpuesto.Click += new System.EventHandler(this.label12_Click);
@@ -326,16 +328,16 @@
             this.lblCantidad.AutoSize = true;
             this.lblCantidad.Location = new System.Drawing.Point(36, 295);
             this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(52, 13);
+            this.lblCantidad.Size = new System.Drawing.Size(68, 16);
             this.lblCantidad.TabIndex = 19;
             this.lblCantidad.Text = "Cantidad:";
             // 
             // rdbInactivo
             // 
             this.rdbInactivo.AutoSize = true;
-            this.rdbInactivo.Location = new System.Drawing.Point(651, 289);
+            this.rdbInactivo.Location = new System.Drawing.Point(641, 289);
             this.rdbInactivo.Name = "rdbInactivo";
-            this.rdbInactivo.Size = new System.Drawing.Size(63, 17);
+            this.rdbInactivo.Size = new System.Drawing.Size(73, 20);
             this.rdbInactivo.TabIndex = 16;
             this.rdbInactivo.TabStop = true;
             this.rdbInactivo.Text = "Inactivo";
@@ -346,7 +348,7 @@
             this.rdbActivo.AutoSize = true;
             this.rdbActivo.Location = new System.Drawing.Point(527, 289);
             this.rdbActivo.Name = "rdbActivo";
-            this.rdbActivo.Size = new System.Drawing.Size(55, 17);
+            this.rdbActivo.Size = new System.Drawing.Size(63, 20);
             this.rdbActivo.TabIndex = 15;
             this.rdbActivo.TabStop = true;
             this.rdbActivo.Text = "Activo";
@@ -358,7 +360,7 @@
             this.lblTotalDetalle.AutoSize = true;
             this.lblTotalDetalle.Location = new System.Drawing.Point(420, 234);
             this.lblTotalDetalle.Name = "lblTotalDetalle";
-            this.lblTotalDetalle.Size = new System.Drawing.Size(70, 13);
+            this.lblTotalDetalle.Size = new System.Drawing.Size(89, 16);
             this.lblTotalDetalle.TabIndex = 13;
             this.lblTotalDetalle.Text = "Total Detalle:";
             // 
@@ -367,7 +369,7 @@
             this.lblSubtotal.AutoSize = true;
             this.lblSubtotal.Location = new System.Drawing.Point(426, 111);
             this.lblSubtotal.Name = "lblSubtotal";
-            this.lblSubtotal.Size = new System.Drawing.Size(49, 13);
+            this.lblSubtotal.Size = new System.Drawing.Size(63, 16);
             this.lblSubtotal.TabIndex = 11;
             this.lblSubtotal.Text = "Subtotal:";
             // 
@@ -376,16 +378,16 @@
             this.lblPrecioUnitario.AutoSize = true;
             this.lblPrecioUnitario.Location = new System.Drawing.Point(420, 45);
             this.lblPrecioUnitario.Name = "lblPrecioUnitario";
-            this.lblPrecioUnitario.Size = new System.Drawing.Size(79, 13);
+            this.lblPrecioUnitario.Size = new System.Drawing.Size(103, 16);
             this.lblPrecioUnitario.TabIndex = 9;
             this.lblPrecioUnitario.Text = "Precio Unitario:";
             // 
             // lblCodigoTipoServicio
             // 
             this.lblCodigoTipoServicio.AutoSize = true;
-            this.lblCodigoTipoServicio.Location = new System.Drawing.Point(36, 231);
+            this.lblCodigoTipoServicio.Location = new System.Drawing.Point(32, 230);
             this.lblCodigoTipoServicio.Name = "lblCodigoTipoServicio";
-            this.lblCodigoTipoServicio.Size = new System.Drawing.Size(144, 13);
+            this.lblCodigoTipoServicio.Size = new System.Drawing.Size(188, 16);
             this.lblCodigoTipoServicio.TabIndex = 7;
             this.lblCodigoTipoServicio.Text = "Codigo Del Tipo De Servicio:";
             // 
@@ -394,7 +396,7 @@
             this.lblCodigoInventario.AutoSize = true;
             this.lblCodigoInventario.Location = new System.Drawing.Point(33, 168);
             this.lblCodigoInventario.Name = "lblCodigoInventario";
-            this.lblCodigoInventario.Size = new System.Drawing.Size(110, 13);
+            this.lblCodigoInventario.Size = new System.Drawing.Size(144, 16);
             this.lblCodigoInventario.TabIndex = 5;
             this.lblCodigoInventario.Text = "Codigo De Inventario:";
             // 
@@ -403,17 +405,17 @@
             this.lblCodigoFactura.AutoSize = true;
             this.lblCodigoFactura.Location = new System.Drawing.Point(32, 111);
             this.lblCodigoFactura.Name = "lblCodigoFactura";
-            this.lblCodigoFactura.Size = new System.Drawing.Size(99, 13);
+            this.lblCodigoFactura.Size = new System.Drawing.Size(131, 16);
             this.lblCodigoFactura.TabIndex = 3;
             this.lblCodigoFactura.Text = "Codigo De Factura:";
             // 
             // txtCodigoDetalleFactura
             // 
             this.txtCodigoDetalleFactura.Enabled = false;
-            this.txtCodigoDetalleFactura.Location = new System.Drawing.Point(197, 45);
+            this.txtCodigoDetalleFactura.Location = new System.Drawing.Point(226, 45);
             this.txtCodigoDetalleFactura.Name = "txtCodigoDetalleFactura";
             this.txtCodigoDetalleFactura.ReadOnly = true;
-            this.txtCodigoDetalleFactura.Size = new System.Drawing.Size(167, 20);
+            this.txtCodigoDetalleFactura.Size = new System.Drawing.Size(167, 23);
             this.txtCodigoDetalleFactura.TabIndex = 2;
             // 
             // lblCodigoDetalleFactura
@@ -421,7 +423,7 @@
             this.lblCodigoDetalleFactura.AutoSize = true;
             this.lblCodigoDetalleFactura.Location = new System.Drawing.Point(33, 48);
             this.lblCodigoDetalleFactura.Name = "lblCodigoDetalleFactura";
-            this.lblCodigoDetalleFactura.Size = new System.Drawing.Size(98, 13);
+            this.lblCodigoDetalleFactura.Size = new System.Drawing.Size(129, 16);
             this.lblCodigoDetalleFactura.TabIndex = 0;
             this.lblCodigoDetalleFactura.Text = "Codigo Del Detalle:";
             this.lblCodigoDetalleFactura.Click += new System.EventHandler(this.label3_Click);
@@ -440,6 +442,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Font = new System.Drawing.Font("Arial", 10F);
             this.tabControl1.Location = new System.Drawing.Point(70, 65);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -457,19 +460,20 @@
             this.tabPage1.Controls.Add(this.dgvDetalleFacturas);
             this.tabPage1.Controls.Add(this.txtNombreDetalleFactura);
             this.tabPage1.Controls.Add(this.lblNombre);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(905, 382);
+            this.tabPage1.Size = new System.Drawing.Size(905, 379);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Consulta";
             // 
             // chkSeleccionar
             // 
             this.chkSeleccionar.AutoSize = true;
+            this.chkSeleccionar.Font = new System.Drawing.Font("Arial", 10F);
             this.chkSeleccionar.Location = new System.Drawing.Point(44, 56);
             this.chkSeleccionar.Name = "chkSeleccionar";
-            this.chkSeleccionar.Size = new System.Drawing.Size(82, 17);
+            this.chkSeleccionar.Size = new System.Drawing.Size(100, 20);
             this.chkSeleccionar.TabIndex = 7;
             this.chkSeleccionar.Text = "Seleccionar";
             this.chkSeleccionar.UseVisualStyleBackColor = true;
@@ -483,7 +487,7 @@
             this.btnExportar.IconSize = 20;
             this.btnExportar.Location = new System.Drawing.Point(44, 324);
             this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(74, 29);
+            this.btnExportar.Size = new System.Drawing.Size(100, 34);
             this.btnExportar.TabIndex = 6;
             this.btnExportar.Text = "Exportar";
             this.btnExportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -495,9 +499,9 @@
             this.btnImprimir.IconColor = System.Drawing.Color.Black;
             this.btnImprimir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnImprimir.IconSize = 20;
-            this.btnImprimir.Location = new System.Drawing.Point(607, 17);
+            this.btnImprimir.Location = new System.Drawing.Point(689, 19);
             this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(74, 29);
+            this.btnImprimir.Size = new System.Drawing.Size(95, 29);
             this.btnImprimir.TabIndex = 5;
             this.btnImprimir.Text = "Limpiar";
             this.btnImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -509,9 +513,9 @@
             this.btnLimpiar.IconColor = System.Drawing.Color.Black;
             this.btnLimpiar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnLimpiar.IconSize = 20;
-            this.btnLimpiar.Location = new System.Drawing.Point(518, 17);
+            this.btnLimpiar.Location = new System.Drawing.Point(571, 19);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(74, 29);
+            this.btnLimpiar.Size = new System.Drawing.Size(97, 29);
             this.btnLimpiar.TabIndex = 4;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -523,9 +527,9 @@
             this.btnBuscar.IconColor = System.Drawing.Color.Black;
             this.btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnBuscar.IconSize = 20;
-            this.btnBuscar.Location = new System.Drawing.Point(428, 17);
+            this.btnBuscar.Location = new System.Drawing.Point(452, 19);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(74, 29);
+            this.btnBuscar.Size = new System.Drawing.Size(97, 29);
             this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -533,25 +537,26 @@
             // 
             // txtNombreDetalleFactura
             // 
-            this.txtNombreDetalleFactura.Location = new System.Drawing.Point(101, 22);
+            this.txtNombreDetalleFactura.Location = new System.Drawing.Point(118, 22);
             this.txtNombreDetalleFactura.Name = "txtNombreDetalleFactura";
-            this.txtNombreDetalleFactura.Size = new System.Drawing.Size(314, 20);
+            this.txtNombreDetalleFactura.Size = new System.Drawing.Size(312, 23);
             this.txtNombreDetalleFactura.TabIndex = 1;
             // 
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.Font = new System.Drawing.Font("Arial", 10F);
             this.lblNombre.Location = new System.Drawing.Point(41, 25);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(54, 15);
+            this.lblNombre.Size = new System.Drawing.Size(60, 16);
             this.lblNombre.TabIndex = 0;
-            this.lblNombre.Text = "Nombre";
+            this.lblNombre.Text = "Nombre:";
             // 
             // DetalleFacturasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1052, 533);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.lblDetallesDeFactura);

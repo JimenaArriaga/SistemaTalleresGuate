@@ -16,7 +16,8 @@ namespace TalleresGuate
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TipoServiciosForm());
+            Application.Run(new MenuForm());
+            //Application.Run(new TipoServiciosForm());
             //Application.Run(new FacturacionesForm());
             //Application.Run(new DetalleFacturasForm());
             //Application.Run(new PlanillasForm());
